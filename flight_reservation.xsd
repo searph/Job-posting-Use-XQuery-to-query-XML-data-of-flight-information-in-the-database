@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:simpleType name="flightnumber">
+		<xs:restriction base="xs:integer">
+			<xs:pattern value="[1-9][0-9][0-9]"/>
+			<xs:pattern value="[1-9][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="phonenumber">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{3}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="airline">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Flights" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+			   <xs:sequence>
+				<xs:element name="Flight" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+                    <xs:sequence>
+					<xs:element name="FlightNumber" type="flightnumber" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="DepartureTime" type="xs:time" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="Duration" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="Capacity" type="xs:positiveInteger" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="Seasonal" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="Origin" type="xs:string" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="Destination" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				   </xs:sequence>							
+				    </xs:complexType>
+                   </xs:element>
+				
+			</xs:sequence>
+		</xs:complexType>
+				</xs:element>
+				
+				<xs:element name="Requests" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Request" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+				<xs:sequence>
+					<xs:element name="AgentName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="RequestDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="ContactPerson" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Phone" type="phonenumber" minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+					</xs:complexType>
+					</xs:element>
+					<xs:element name="Reservation" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Flight" type="flightnumber" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="TravelDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="NumberofSeats" type="xs:positiveInteger" minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+					</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				</xs:complexType>
+				</xs:element>
+				
+			</xs:sequence>
+		</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+</xs:schema>
